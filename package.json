@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/geeofree/twitter-analyzer#readme",
   "dependencies": {
-    "prompt": "^1.0.0"
+    "prompt": "^1.0.0",
+    "twitter": "^1.7.1"
   }
 }
