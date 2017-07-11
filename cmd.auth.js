@@ -23,7 +23,7 @@ const schema = {
 
 const authAPI = (callback) => {
   prompt.start()
-  prompt.get(schema, (err, result) => callback(result))
+  prompt.get(schema, (err, result) => callback(result, err))
 }
 
 export default authAPI
