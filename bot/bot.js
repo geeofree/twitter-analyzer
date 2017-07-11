@@ -1,9 +1,10 @@
-const { authAPI } = require('./cmd.auth')
-const config = require('./api.config')
-const Twitter = require('twitter')
+const { authAPI }    = require('./cmd.auth')
+const { TwitterApp } = require('./twitter.app')
 
-const client = new Twitter(config)
+const config = require('../api.config')
+const client = new TwitterApp(config)
 
-client.get('statuses/user_timeline.json', { screen_name: 'valinegeneve' }, (err, tweets, res) => {
-  tweets.forEach(tweet => console.log(tweet.text))
+client.getUserStatus('GeeOFree', (err, tweets, response) => {
+  const words = tweets.map(tweet => tweet.text.toLowerCase().split(/[\s,\W]/).filter(word => word.length > 2))
+  console.log(words)
 })
