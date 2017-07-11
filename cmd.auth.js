@@ -26,4 +26,4 @@ const authAPI = (callback) => {
   prompt.get(schema, (err, result) => callback(result, err))
 }
 
-export default authAPI
+module.exports = { authAPI }
