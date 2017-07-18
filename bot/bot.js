@@ -4,7 +4,24 @@ const { TwitterApp } = require('./twitter.app')
 const config = require('../api.config')
 const client = new TwitterApp(config)
 
-client.getUserStatus('GeeOFree', (err, tweets, response) => {
-  const words = tweets.map(tweet => tweet.text.toLowerCase().split(/[\s,\W]/).filter(word => word.length > 2))
-  console.log(words)
+const months = {
+  0: "January",
+  1: "February",
+  2: "March",
+  3: "April",
+  4: "May",
+  5: "June",
+  6: "July",
+  7: "August",
+  8: "September",
+  9: "October",
+  10: "November",
+  11: "December"
+}
+
+client.getWordCount('valinegeneve', (words) => {
+  words.forEach(({ word, count }) => {
+    const avg_percent = (count / words.length) * 100
+    console.log(word, avg_percent)
+  })
 })
