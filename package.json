@@ -5,7 +5,9 @@
   "main": "cmd.auth.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./TwitterAPI/server.twitter.js",
+    "start": "nodemon TwitterAPI/server.twitter.js --exec babel-node",
+    "prod-server-build": "babel ./TwitterAPI -d prod",
+    "serve": "node prod/server.twitter.js",
     "dev-server": "webpack-dev-server",
     "build": "webpack"
   },
@@ -32,6 +34,7 @@
     "webpack": "^3.3.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-loader": "^7.1.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
