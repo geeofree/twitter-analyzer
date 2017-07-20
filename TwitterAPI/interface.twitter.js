@@ -11,7 +11,7 @@ export default (APIConfig) => {
 
       const getTweets = (id=true, counter=0) => {
         if(typeof id === 'number') params.max_id = id
-        if(!id || counter >= 1000) { resolve(posts); return; }
+        if(!id || counter >= 1000) { resolve(JSON.stringify(posts)); return; }
         if(!id && counter === 0) { reject({ status: 'Empty', data: 'none' }); return; }
 
         _twitter.get(endpoint, params, (err, data) => {
