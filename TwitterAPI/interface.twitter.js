@@ -1,11 +1,9 @@
-const Twitter = require('twitter')
+import Twitter from 'twitter'
 
-class TwitterApp {
-  constructor(apiConfig) {
-    this._twitter = new Twitter(apiConfig)
-  }
+export default (APIConfig) => {
+  const _twitter = new Twitter(APIConfig)
 
-  getUserTweets(screen_name) {
+  const getUserTweets = (screen_name) => {
     return new Promise((resolve, reject) => {
       const params = { screen_name, count: 200, include_rts: false, exclude_replies: true }
       const endpoint = 'statuses/user_timeline.json'
@@ -16,7 +14,7 @@ class TwitterApp {
         if(!id || counter >= 1000) { resolve(posts); return; }
         if(!id && counter === 0) { reject({ status: 'Empty', data: 'none' }); return; }
 
-        this._twitter.get(endpoint, params, (err, data) => {
+        _twitter.get(endpoint, params, (err, data) => {
           const last_id = data[data.length - 1].id
           const data_sum = counter + data.length
 
@@ -28,6 +26,6 @@ class TwitterApp {
       getTweets()
     })
   }
-}
 
-module.exports = TwitterApp
+  return { getUserTweets }
+}
