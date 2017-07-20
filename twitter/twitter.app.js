@@ -1,22 +1,33 @@
 const Twitter = require('twitter')
-const { wordCount } = require('../stat/stat')
 
 class TwitterApp {
   constructor(apiConfig) {
     this._twitter = new Twitter(apiConfig)
   }
 
-  _getUserStatus(screen_name, callback) {
-    const params = { screen_name, count: 200, include_rts: false, exclude_replies: true }
-    this._twitter.get('statuses/user_timeline.json', params, callback)
-  }
+  getUserTweets(screen_name) {
+    return new Promise((resolve, reject) => {
+      const params = { screen_name, count: 200, include_rts: false, exclude_replies: true }
+      const endpoint = 'statuses/user_timeline.json'
+      const posts = []
 
-  getWordCount(screen_name, callback) {
-    this._getUserStatus(screen_name, (err, tweets, response) => {
-      const posts = tweets.map(tweet => tweet.text.toLowerCase().split(/[\s,\W]|https?.+/).filter(txt => txt.length > 2))
-      callback(wordCount(posts))
+      const getTweets = (id=true, counter=0) => {
+        if(typeof id === 'number') params.max_id = id
+        if(!id || counter >= 1000) { resolve(posts); return; }
+        if(!id && counter === 0) { reject({ status: 'Empty', data: 'none' }); return; }
+
+        this._twitter.get(endpoint, params, (err, data) => {
+          const last_id = data[data.length - 1].id
+          const data_sum = counter + data.length
+
+          posts.push(...data)
+          getTweets(last_id, data_sum)
+        })
+      }
+
+      getTweets()
     })
   }
 }
 
-module.exports = { TwitterApp }
+module.exports = TwitterApp
