@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/geeofree/twitter-analyzer#readme",
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-core": "^6.25.0",
     "express": "^4.15.3",
     "prompt": "^1.0.0",

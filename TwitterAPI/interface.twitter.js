@@ -9,17 +9,17 @@ export default (APIConfig) => {
       const endpoint = 'statuses/user_timeline.json'
       const posts = []
 
-      const getTweets = (id=true, counter=0) => {
-        if(typeof id === 'number') params.max_id = id
-        if(!id || counter >= 1000) { resolve(JSON.stringify(posts)); return; }
-        if(!id && counter === 0) { reject({ status: 'Empty', data: 'none' }); return; }
+      const getTweets = (item=true, counter=0) => {
+        if(item) { params.max_id = item.id }
+        if(!item || counter >= 1000) { resolve(posts); return; }
+        if(!item && counter === 0) { reject({ status: 403, data: 'No Data found' }); return; }
 
         _twitter.get(endpoint, params, (err, data) => {
-          const last_id = data[data.length - 1].id
+          const last_item = data[data.length - 1]
           const data_sum = counter + data.length
 
-          posts.push(...data)
-          getTweets(last_id, data_sum)
+          posts.push(...data.map(d => d.text))
+          getTweets(last_item, data_sum)
         })
       }
 
