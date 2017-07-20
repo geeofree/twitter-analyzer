@@ -1,3 +1,4 @@
 /node_modules/
 npm-debug.log
-/TwitterAPI/config.twitter.js
+config.twitter.js
+/prod/
