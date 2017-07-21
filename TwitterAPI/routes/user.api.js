@@ -5,8 +5,12 @@ import TwitterInterface from '../interface.twitter'
 import APIConfig from '../config.twitter'
 const API = TwitterInterface(APIConfig)
 
-router.get('/:twitter_handle', (req, res) => {
-  API.getUserTweets(req.params.twitter_handle).then(data => res.json(data))
+router.get('/:twitterHandle', (req, res) => {
+  const { twitterHandle } = req.params
+
+  API.getUserTweets(twitterHandle)
+  .then(data => res.json(data))
+  .catch(err => res.json(err))
 })
 
 
