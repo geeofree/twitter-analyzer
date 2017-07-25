@@ -5,7 +5,7 @@
   "main": "cmd.auth.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon TwitterAPI/server.twitter.js --exec babel-node",
+    "start": "nodemon TwitterAPI/server.js --exec babel-node",
     "prod-server-build": "babel ./TwitterAPI -d prod",
     "serve": "node prod/server.twitter.js",
     "dev-server": "webpack-dev-server",
