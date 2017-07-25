@@ -1,8 +1,8 @@
 import express from 'express'
 const router = express.Router()
 
-import TwitterInterface from '../interface.twitter'
-import APIConfig from '../config.twitter'
+import TwitterInterface from '../twitter/interface.twitter'
+import APIConfig from '../twitter/config.twitter'
 const API = TwitterInterface(APIConfig)
 
 router.get('/:twitterHandle', (req, res) => {
