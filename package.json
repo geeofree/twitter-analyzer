@@ -2,14 +2,15 @@
   "name": "twitter-analyzer",
   "version": "1.0.0",
   "description": "",
-  "main": "cmd.auth.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/server.js --exec babel-node",
-    "prod-server-build": "babel ./server -d prod",
-    "serve": "node prod/server.twitter.js",
-    "dev-server": "webpack-dev-server",
-    "build": "webpack"
+    "start": "node prod/server/server.js",
+    "build:server": "babel server -d prod/server",
+    "build:client": "webpack -p",
+    "build:app": "npm run build:server && npm run build:client",
+    "dev:server:client": "webpack-dev-server",
+    "dev:server:api": "nodemon server/server.js --exec babel-node"
   },
   "repository": {
     "type": "git",
