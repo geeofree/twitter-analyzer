@@ -29,15 +29,21 @@ class SearchInput extends Component {
 
     if(!fetching) {
       toggleFetch(true)
+
       axios.get(`${domain}/api/v1.0/user/${twitterHandle}`)
 
-      socket.on('receive tweets', tweets => {
+      socket.on('receive:tweets', tweets => {
         data.push(tweets.item)
 
         if(data.length === tweets.total) {
           receiveData({ status: 200, data })
           toggleFetch(false)
         }
+      })
+
+      socket.on('receive:tweets:error', err => {
+        receiveData(err)
+        toggleFetch(false)
       })
     }
 

@@ -10,7 +10,7 @@ export default (APIConfig) => {
       const posts = []
 
       const getData = (err, tweets) => {
-        if(err) { reject(err); return; }
+        if(err) { reject({ status: 404, status_message: 'Data not found.' }); return; }
 
         if(posts.length === 0 && tweets.length === 0) {
           reject({ status: 404, status_message: 'Data not found.' })
@@ -20,6 +20,8 @@ export default (APIConfig) => {
 
         const lastItem = tweets[tweets.length - 1]
         const limit = lastItem.user.status_count < 1000 ? lastItem.user.status_count : 1000
+
+        if(params.max_id && params.max_id === lastItem.id) { resolve(posts); return; }
         params.max_id = lastItem.id
 
         if(posts.length + tweets.length < limit) {
