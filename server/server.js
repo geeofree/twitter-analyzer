@@ -15,8 +15,6 @@ app.use(express.static('dist'))
 
 app.get('/', (req, res) => res.sendFile('index.html'))
 
-io.on('connection', (socket) => console.log('user connected'))
-
 server.listen(PORT, () => console.log(`Listening to LOCALHOST:${PORT}`))
 
 export default io
