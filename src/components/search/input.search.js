@@ -38,7 +38,7 @@ class SearchInput extends Component {
     }
 
     const receiveError = (error) => {
-      receiveData(err)
+      receiveData(error)
       toggleFetch(false)
       socket.removeListener('receive:tweets:error', receiveError)
     }
@@ -60,7 +60,7 @@ class SearchInput extends Component {
     return (
       <form className={ fetching ? 'search-input close' : 'search-input' } onSubmit={submitHandler}>
         <button className="logo"></button>
-        <input className='user-input' type="text" placeholder="yourTwitterHandle" onChange={changeHandler}/>
+        <input className='user-input' type="text" placeholder="twitterHandle" onChange={changeHandler}/>
       </form>
     )
   }
