@@ -1,7 +1,12 @@
 import React from 'react'
+import './search.style.sass'
+
+import SearchInput from './input.search'
 
 export default () => (
   <div id="search">
-    <h1>Search Page</h1>
+    <div className="container">
+      <SearchInput />
+    </div>
   </div>
 )
