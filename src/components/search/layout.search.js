@@ -4,10 +4,11 @@ import './search.style.sass'
 
 import SearchInput from './input.search'
 
-const SearchLayout = ({ userData }) => (
+const SearchLayout = ({ userData, fetching }) => (
   <div className={
-    !userData || userData.status === 200 ? 'search' :
-    userData && userData.status >= 400 ? 'search error' : 'search'
+    fetching ? 'search busy' :
+    userData && userData.status >= 400 ? 'search error' :
+    !userData || userData.status === 200 ? 'search success' : 'search'
   }>
     <div className="container">
       <SearchInput />
@@ -16,7 +17,8 @@ const SearchLayout = ({ userData }) => (
 )
 
 const mapStateToProps = (state) => ({
-  userData: state.search.userData
+  userData: state.search.userData,
+  fetching: state.search.fetching
 })
 
 export default connect(mapStateToProps)(SearchLayout)
