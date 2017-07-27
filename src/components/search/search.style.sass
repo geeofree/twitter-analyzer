@@ -17,7 +17,7 @@ $searchInputHeight: 60px
     transform: translate(-50%, -50%)
 
     .search-input
-      width: 300px
+      width: 400px
       height: $searchInputHeight
       transition-duration: 0.3s
 
@@ -42,14 +42,14 @@ $searchInputHeight: 60px
       .user-input
         height: 100%
         width: 100%
-        font-size: 30px
-        font-family: Arial
+        font-size: 25px
+        font-family: Helvetica
         color: #555
         border: none
-        padding-left: $searchInputHeight + 5px
+        padding-left: $searchInputHeight + 10px
         padding-right: 10px
-        border-radius: 35px
-        box-shadow: 2px 2px 3px
+        border-radius: $searchInputHeight
+        box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5)
 
     .close
       width: $searchInputHeight !important
@@ -64,4 +64,4 @@ $searchInputHeight: 60px
   background: #4fe38f
 
 .busy
-  background: #cc8c2b
+  background: #eda73d
