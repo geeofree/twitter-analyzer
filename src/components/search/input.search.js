@@ -60,7 +60,7 @@ class SearchInput extends Component {
     return (
       <form className={ fetching ? 'search-input close' : 'search-input' } onSubmit={submitHandler}>
         <button className="logo"></button>
-        <input className='user-input' type="text" placeholder="twitterHandle" onChange={changeHandler}/>
+        <input className='user-input' type="text" placeholder="twitter_handle" onChange={changeHandler}/>
       </form>
     )
   }
