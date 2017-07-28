@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { toggleFetch, receiveData } from '../../actions/search.actions'
+import { toggleFetch, receiveData, addProgress, resetProgress } from '../../actions/search.actions'
 import io from 'socket.io-client'
 import axios from 'axios'
 
@@ -21,7 +21,7 @@ class SearchInput extends Component {
 
   submitHandler(event) {
     const { twitterHandle } = this.state
-    const { toggleFetch, fetching, receiveData } = this.props
+    const { toggleFetch, fetching, receiveData, addProgress, resetProgress } = this.props
 
     const domain = 'http://localhost:8080'
     const socket = io.connect(domain)
@@ -29,18 +29,21 @@ class SearchInput extends Component {
 
     const receiveSuccess = tweets => {
       data.push(tweets.item)
+      addProgress(tweets.total)
 
       if(data.length === tweets.total) {
-        receiveData({ status: 200, data })
+        receiveData({ status: data[0].status, data })
         toggleFetch(false)
         socket.removeListener('receive:tweets', receiveSuccess)
+        resetProgress()
       }
     }
 
     const receiveError = (error) => {
-      receiveData(error)
+      receiveData({ status: error.status, data: error.status_message })
       toggleFetch(false)
       socket.removeListener('receive:tweets:error', receiveError)
+      resetProgress()
     }
 
     if(!fetching) {
@@ -72,7 +75,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   toggleFetch: (fetchStatus) => dispatch(toggleFetch(fetchStatus)),
-  receiveData: (data) => dispatch(receiveData(data))
+  receiveData: (data) => dispatch(receiveData(data)),
+  addProgress: (max) => dispatch(addProgress(max)),
+  resetProgress: () => dispatch(resetProgress())
 })
 
 

@@ -18,8 +18,9 @@ export default (APIConfig) => {
         }
         else if(tweets.length === 0) { resolve(posts); return; }
 
+        const max_data = 1000
         const lastItem = tweets[tweets.length - 1]
-        const limit = lastItem.user.status_count < 1000 ? lastItem.user.status_count : 1000
+        const limit = lastItem.user.status_count < max_data ? lastItem.user.status_count : max_data
 
         if(params.max_id && params.max_id === lastItem.id) { resolve(posts); return; }
         params.max_id = lastItem.id
