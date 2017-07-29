@@ -4,8 +4,6 @@ import io from '../server'
 import TwitterInterface from '../twitter/interface.twitter'
 import APIConfig from '../twitter/config.twitter'
 
-console.log(process.env.NODE_ENV, APIConfig)
-
 const router = express.Router()
 const API = TwitterInterface(APIConfig)
 

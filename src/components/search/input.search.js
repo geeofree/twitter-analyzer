@@ -23,7 +23,7 @@ class SearchInput extends Component {
     const { twitterHandle } = this.state
     const { toggleFetch, fetching, receiveData, addProgress, resetProgress } = this.props
 
-    const domain = 'http://localhost:8080'
+    const domain = 'https://tweet-analyze.herokuapp.com/'
     const socket = io.connect(domain)
     const data = []
 
