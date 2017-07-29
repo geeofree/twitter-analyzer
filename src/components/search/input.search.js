@@ -25,10 +25,12 @@ class SearchInput extends Component {
 
     const domain = 'https://tweet-analyze.herokuapp.com'
     const endpoint = `${domain}api/v1.0/user/${twitterHandle}`
+
+    console.log(domain, endpoint)
+
     const socket = io.connect(domain)
     const data = []
 
-    console.log(endpoint, domain)
 
     const receiveSuccess = tweets => {
       data.push(tweets.item)
