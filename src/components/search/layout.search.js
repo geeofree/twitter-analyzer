@@ -12,16 +12,15 @@ const SearchLayout = ({ userData, fetching, progressBar }) => (
     !userData || userData.status === 200 ? 'search success' : 'search'
   }>
     <div className="container">
-      <LoadingBar progress={progressBar.progress} expectedLoad={progressBar.max}/>
       <SearchInput />
+      { fetching && <LoadingBar /> }
     </div>
   </div>
 )
 
 const mapStateToProps = (state) => ({
   userData: state.search.userData,
-  fetching: state.search.fetching,
-  progressBar: state.search.progressBar
+  fetching: state.search.fetching
 })
 
 export default connect(mapStateToProps)(SearchLayout)
