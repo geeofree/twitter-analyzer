@@ -24,8 +24,11 @@ class SearchInput extends Component {
     const { toggleFetch, fetching, receiveData, addProgress, resetProgress } = this.props
 
     const domain = 'https://tweet-analyze.herokuapp.com'
+    const endpoint = `${domain}api/v1.0/user/${twitterHandle}`
     const socket = io.connect(domain)
     const data = []
+
+    console.log(endpoint, domain)
 
     const receiveSuccess = tweets => {
       data.push(tweets.item)
@@ -48,7 +51,7 @@ class SearchInput extends Component {
 
     if(!fetching) {
       toggleFetch(true)
-      axios.get(`${domain}/api/v1.0/user/${twitterHandle}`)
+      axios.get(endpoint)
       socket.on('receive:tweets', receiveSuccess)
       socket.on('receive:tweets:error', receiveError)
     }
