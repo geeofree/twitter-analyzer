@@ -22,6 +22,8 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+console.log(process.env.NODE_ENV, _config2.default);
+
 var router = _express2.default.Router();
 var API = (0, _interface2.default)(_config2.default);
 

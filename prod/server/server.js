@@ -26,7 +26,7 @@ var app = (0, _express2.default)();
 var server = _http2.default.Server(app);
 var io = (0, _socket2.default)(server);
 var ENDPOINT = '/api/v1.0';
-var PORT = 8080;
+var PORT = process.env.PORT || 8080;
 
 app.use(ENDPOINT, _routes2.default);
 
