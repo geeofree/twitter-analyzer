@@ -23,30 +23,33 @@ class SearchInput extends Component {
     const { twitterHandle } = this.state
     const { toggleFetch, fetching, receiveData, addProgress, resetProgress } = this.props
 
-    const domain = 'https://tweet-analyze.herokuapp.com'
+    const domain = 'http://localhost:8080'
     const endpoint = `${domain}/api/v1.0/user/${twitterHandle}`
 
-    const socket = io.connect(domain)
+    const socket = io.connect(domain, { forceNew: true })
     const data = []
 
 
     const receiveSuccess = tweets => {
-      data.push(tweets.item)
-      addProgress(tweets.total)
-
-      if(data.length === tweets.total) {
-        receiveData({ status: data[0].status, data })
+      if(tweets.status !== 200) {
+        data.push(tweets.data)
+        addProgress(tweets.max_batch)
+      }
+      else {
+        receiveData({ status: tweets.status, data })
         toggleFetch(false)
-        socket.removeListener('receive:tweets', receiveSuccess)
         resetProgress()
+        socket.removeListener('receive:tweets', receiveSuccess)
+        socket.disconnect()
       }
     }
 
     const receiveError = (error) => {
-      receiveData({ status: error.status, data: error.status_message })
+      receiveData({ status: error.status, data: error.data })
       toggleFetch(false)
-      socket.removeListener('receive:tweets:error', receiveError)
       resetProgress()
+      socket.removeListener('receive:tweets:error', receiveError)
+      socket.disconnect()
     }
 
     if(!fetching) {
