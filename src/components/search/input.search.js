@@ -26,7 +26,7 @@ class SearchInput extends Component {
     const domain = location.origin
     const endpoint = `${domain}/api/v1.0/user/${twitterHandle}`
 
-    const socket = io.connect(domain, { forceNew: true, transports: ['websocket'] })
+    const socket = io.connect(domain)
     const data = []
 
 
