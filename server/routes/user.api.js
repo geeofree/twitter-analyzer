@@ -10,9 +10,21 @@ const API = TwitterInterface(APIConfig)
 router.get('/:twitterHandle', (req, res) => {
   const { twitterHandle } = req.params
 
-  API.getUserTweets(twitterHandle)
-  .then(data => data.forEach(item => io.emit('receive:tweets', { total: data.length, item })))
-  .catch(err => io.emit('receive:tweets:error', err))
+  API.getUserTweets(twitterHandle, api_response => {
+    if(api_response.status === 201) {
+      api_response.data.forEach(data => io.emit('receive:tweets', {
+        data,
+        max_batch: api_response.max_batch,
+        status: api_response.status,
+      }))
+    }
+    else if(api_response.status === 200) {
+      io.emit('receive:tweets', { status: api_response.status })
+    }
+    else if(api_response.status >= 400) {
+      io.emit('receive:tweets:error', api_response)
+    }
+  })
 })
 
 
