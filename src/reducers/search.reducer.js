@@ -34,10 +34,12 @@ export default (state=initState, action) => {
       })
     })
     case IS_FETCHING:
-      return assign(state, { fetching: action.fetchStatus, userData: assign(state.userData, {
-        data: action.fetchStatus ? [] : state.userData
+      return assign(state, {
+        fetching: action.fetchStatus,
+        userData: assign(state.userData, {
+          data: action.fetchStatus ? [] : state.userData.data
+        })
       })
-    })
     default:
       return state
   }
