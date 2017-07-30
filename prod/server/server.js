@@ -12,6 +12,10 @@ var _http = require('http');
 
 var _http2 = _interopRequireDefault(_http);
 
+var _https = require('https');
+
+var _https2 = _interopRequireDefault(_https);
+
 var _routes = require('./routes/routes.api');
 
 var _routes2 = _interopRequireDefault(_routes);
@@ -23,7 +27,7 @@ var _socket2 = _interopRequireDefault(_socket);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
-var server = _http2.default.Server(app);
+var server = process.env.NODE_ENV === 'development' ? _http2.default.Server(app) : _https2.default.Server(app);
 var io = (0, _socket2.default)(server);
 var ENDPOINT = '/api/v1.0';
 var PORT = process.env.PORT || 8080;
