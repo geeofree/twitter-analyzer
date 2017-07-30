@@ -5,7 +5,7 @@ import apiRoutes from './routes/routes.api'
 import socketIO from 'socket.io'
 
 const app = express()
-const server = process.env.NODE_ENV === 'development' ? http.Server(app) : https.Server(app)
+const server = https.Server(app)
 const io = socketIO(server)
 const ENDPOINT = '/api/v1.0'
 const PORT = process.env.PORT || 8080
