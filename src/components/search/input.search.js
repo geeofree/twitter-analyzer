@@ -23,7 +23,7 @@ class SearchInput extends Component {
     const { twitterHandle } = this.state
     const { toggleFetch, fetching, receiveData, addProgress, resetProgress } = this.props
 
-    const prod = false
+    const prod = true
 
     const domain = prod ? location.origin : 'http://localhost:8080'
     const endpoint = `${domain}/api/v1.0/user/${twitterHandle}`
