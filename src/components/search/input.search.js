@@ -23,10 +23,10 @@ class SearchInput extends Component {
     const { twitterHandle } = this.state
     const { toggleFetch, fetching, receiveData, addProgress, resetProgress } = this.props
 
-    const domain = 'http://localhost:8080'
+    const domain = location.origin
     const endpoint = `${domain}/api/v1.0/user/${twitterHandle}`
 
-    const socket = io().connect()
+    const socket = io(domain).connect()
     const data = []
 
 
