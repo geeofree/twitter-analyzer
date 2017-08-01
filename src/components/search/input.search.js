@@ -26,7 +26,7 @@ class SearchInput extends Component {
     const domain = 'http://localhost:8080'
     const endpoint = `${domain}/api/v1.0/user/${twitterHandle}`
 
-    const socket = io(domain).connect()
+    const socket = io().connect()
     const data = []
 
 
